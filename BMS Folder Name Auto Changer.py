@@ -21,6 +21,7 @@ for (path, dir, files) in os.walk(BMS_Path): # BMS 폴더 속 BMS 파일을 읽�
         continue
     
     for i in range(0, len(BMS_list)): #모은 BMS를 오래된 날짜 순으로 정렬.
+        print(BMS_list[i])
         for j in range(0, len(BMS_list)):
             if os.path.getmtime(BMS_list[i]) < os.path.getmtime(BMS_list[j]):
                 (BMS_list[i], BMS_list[j]) = (BMS_list[j], BMS_list[i])
@@ -45,13 +46,13 @@ for (path, dir, files) in os.walk(BMS_Path): # BMS 폴더 속 BMS 파일을 읽�
             BMS_filename = BMS_list[0].rsplit(BMS_list[0].split('/')[-1])[0].strip("/").strip()
             
             if BMS_title[-3:].upper() in ('AL)', 'YS)', 'ER)', 'R7)', 'L7)', 'R5)', 'L5)', 'S)-', 'RD)'): # 차분명을 폴더에 넣지 않기 위한 작업
-                BMSfolderNameBefore = "%s/%s (by %s)" % (BMS_Path, BMS_title.rsplit('(', 1)[0].strip(), BMS_artist.rsplit('/')[0]strip()))
+                BMSfolderNameBefore = "%s/%s (by %s)" % (BMS_Path, BMS_title.rsplit('(', 1)[0].strip(), BMS_artist.rsplit('/')[0].strip())
             elif BMS_title[-3:].upper() in ('AL-', 'YS-', 'ER-', 'R7-', 'L7-', 'R5-', 'L5-', 'SY-', 'RD-'):
-                BMSfolderNameBefore = "%s/%s (by %s)" % (BMS_Path, BMS_title.rsplit('-', 2)[-3].strip(), BMS_artist.rsplit('/')[0]strip())
+                BMSfolderNameBefore = "%s/%s (by %s)" % (BMS_Path, BMS_title.rsplit('-', 2)[-3].strip(), BMS_artist.rsplit('/')[0].strip())
             elif BMS_title[-3:].upper() in ('AL]', 'YS]', 'ER]', 'R7]', 'L7]', 'R5]', 'L5]', 'SY]', 'RD]'):
-                BMSfolderNameBefore = "%s/%s (by %s)" % (BMS_Path, BMS_title.rsplit('[', 1)[0].strip(), BMS_artist.rsplit('/')[0]strip())
+                BMSfolderNameBefore = "%s/%s (by %s)" % (BMS_Path, BMS_title.rsplit('[', 1)[0].strip(), BMS_artist.rsplit('/')[0].strip())
             else:
-                BMSfolderNameBefore = "%s/%s (by %s)" % (BMS_Path, BMS_title.rsplit('[', 1)[0].strip(), BMS_artist.rsplit('/')[0]strip())
+                BMSfolderNameBefore = "%s/%s (by %s)" % (BMS_Path, BMS_title.rsplit('[', 1)[0].strip(), BMS_artist.rsplit('/')[0].strip())
                 
             BMStranslate = BMSfolderNameBefore.maketrans({"*":"","?":"","\"":"","<":"",">":"","|":""})
             try:  # 폴더명 변경 및 예외 발생 시 예외처리
